@@ -32,3 +32,4 @@ add_executable(tests lexer.test.cpp
         token.h
         token.cpp)
 target_link_libraries(tests Catch2::Catch2WithMain)
+target_link_libraries(tests magic_enum)
