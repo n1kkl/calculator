@@ -17,8 +17,8 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake --target test ..
           make
       - name: Run Catch2 Tests
         run: |
-          ./build/your_project_name
+          ./build/test

@@ -15,10 +15,10 @@ private:
     int read_position = 0;
     char current_char;
 
-    bool is_whitespace(char token);
+    static bool is_whitespace(char token);
     void skip_whitespace();
 
-    bool is_number(char token);
+    static bool is_number(char token);
     std::string read_number();
 };
 

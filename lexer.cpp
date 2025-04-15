@@ -1,7 +1,9 @@
 #include <memory>
+#include <utility>
 #include "lexer.h"
 
-Lexer::Lexer(std::string input) : input(input) {
+Lexer::Lexer(std::string input) : input(std::move(input)) {
+  current_char = 0;
   read_char();
 }
 
@@ -55,7 +57,7 @@ Token Lexer::next_token() {
   return token;
 }
 
-bool Lexer::is_whitespace(char token) {
+bool Lexer::is_whitespace(const char token) {
   return token == ' ' || token == '\t' || token == '\n' || token == '\r';
 }
 
@@ -65,7 +67,7 @@ void Lexer::skip_whitespace() {
   }
 }
 
-bool Lexer::is_number(char token) {
+bool Lexer::is_number(const char token) {
   return token >= '0' && token <= '9';
 }
 
