@@ -2,23 +2,24 @@ name: Catch2 Tests
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ "master", "develop" ]
+  pull_request:
+    branches: [ "master", "develop" ]
+
 
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up build environment
+      - uses: actions/checkout@v4
+      - name: Set up C++ environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake g++
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake --build .. --target test
-          make
-      - name: Run Catch2 Tests
-        run: |
-          ./build/test
+          sudo apt-get install build-essential cmake
+      - name: Configure
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build
+      - name: Run tests
+        working-directory: ${{github.workspace}}/build
+        run: ctest -V
