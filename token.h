@@ -27,4 +27,6 @@ struct Token {
     Token(TokenType type, std::string value);
 };
 
+std::ostream& operator<<(std::ostream &strm, const Token &token);
+
 #endif
