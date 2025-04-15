@@ -1,0 +1,24 @@
+name: Catch2 Tests
+
+on:
+  push:
+    branches: [ master, develop ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake g++
+      - name: Build project
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+      - name: Run Catch2 Tests
+        run: |
+          ./build/your_project_name
