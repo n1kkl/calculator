@@ -1,18 +1,19 @@
 #include <chrono>
 #include <iostream>
+#include <vector>
 
 #include "lexer.h"
 
 [[noreturn]] int main() {
     while (true) {
-        std::cout << ">>  ";
+        std::cout << ">> ";
         std::string line;
         std::getline(std::cin, line);
 
         auto start = std::chrono::high_resolution_clock::now();
 
         Lexer lexer(line);
-        std::vector<Token> tokens = std::vector<Token>();
+        auto tokens = std::vector<Token>();
 
         for (Token token = lexer.next_token(); token.type != TokenType::End; token = lexer.next_token()) {
             tokens.push_back(token);
@@ -25,7 +26,7 @@
         for (const Token& token: tokens) {
             std::cout << token << " ";
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
 
         std::cout << "lexing time: " << microseconds << std::endl;
     }
